@@ -1,0 +1,58 @@
+<%- include('header'); -%>
+    <div class="c">
+        <h1>Clients Information</h1>
+        <table id="catalog">
+            <thead>
+                <tr>
+                    <th scope="col">Society</th>
+                    <th scope="col">Contact</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Zip Code</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Fax</th>
+                    <th scope="col">Payment</th>
+                    <th scope="col">Informations</th>
+                    <th scope="col">Max Outstanding</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% client.forEach(client => { %>
+                    <tr>
+                        <th scope="row">
+                            <%= client.society %>
+                        </th>
+                        <td>
+                            <%= client.contact %>
+                        </td>
+                        <td>
+                            <%= client.addres %>
+                        </td>
+                        <td>
+                            <%= client.zipcode %>
+                        </td>
+                        <td>
+                            <%= client.city %>
+                        </td>
+                        <td>
+                            <%= client.phone %>
+                        </td>
+                        <td>
+                            <%= client.fax %>
+                        </td>
+                        <td>
+                            <%= client.payment %>
+                        </td>
+                        <td>
+                            <%= client.informations %>
+                        </td>
+                        <td>
+                            <%= client.max_outstanding %>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <%- include('footer'); -%></br>

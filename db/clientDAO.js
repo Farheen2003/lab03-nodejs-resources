@@ -3,14 +3,43 @@ const bcrypt = require("bcryptjs");
 
 //select all clients
 function find(callback) {
+    const selectClients = "SELECT * from client; ";
     var rows = null;
-    //put your code her to select clients and return the array
-    //....
-    callback(null, rows);
+    database.getResult(selectClients, function(err, rows) {
+        if (!err) {
+            callback(null, rows);
+        } else {
+            console.log(err);
+            throw err;
+        }
+    });
+    //callback(null, rows);
 }
 
 function findByUsername(username, callback) {
     const selectClient = (`SELECT * from account where username like '${username}';`);
+    database.getResult(selectClient, function(err, rows) {
+        if (!err) {
+            callback(null, rows);
+        } else {
+            console.log(err);
+        }
+    });
+}
+
+function findByNumclient(num_client, callback) {
+    const selectClient = (`SELECT * from account where num_client like '${num_client}';`);
+    database.getResult(selectClient, function(err, rows) {
+        if (!err) {
+            callback(null, rows);
+        } else {
+            console.log(err);
+        }
+    });
+}
+
+function findBySociety(society, callback) {
+    const selectClient = (`SELECT * from account where society like '${society}';`);
     database.getResult(selectClient, function(err, rows) {
         if (!err) {
             callback(null, rows);
@@ -33,7 +62,7 @@ function cryptPassword(pass, callback) {
                 if (err) {
                     throw err;
                 } else {
-                    //console.log(`hash -> ${hash}`);
+                    console.log(`hash -> ${hash}`);
                     //return the computed hash
                     callback(err, hash);
                 }
@@ -76,6 +105,8 @@ module.exports = {
     findBySociety,
     findByNumclient,
     createClient,
-    deleteClient,
-    createInitialAccounts
+    createAccount,
+    cryptPassword,
+    //deleteClient,
+    //createInitialAccounts
 };

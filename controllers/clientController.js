@@ -1,10 +1,12 @@
+const { Client } = require('../models/entities');
 const loginControl = (request, response) => {
     const clientServices = require('../services/clientServices');
 
     let username = request.body.username;
     let password = request.body.password;
     if (!username || !password) {
-        response.send('login failed');
+        console.log(username);
+        response.send('Login failed');
         response.end();
     } else {
         if (request.session && request.session.user) {
@@ -14,16 +16,22 @@ const loginControl = (request, response) => {
             clientServices.loginService(username, password, function(err, dberr, client) {
                 console.log("Client from login service :" + JSON.stringify(client));
                 if (client === null) {
-                    console.log("Auhtentication problem!");
-                    response.send('login failed'); //invite to register
+                    console.log("Authentication problem!");
+                    response.send('Login failed - Authentication problem'); //invite to register
                     response.end();
                 } else {
                     console.log("User from login service :" + client[0].num_client);
                     //add to session
                     request.session.user = username;
                     request.session.num_client = client[0].num_client;
-                    request.session.admin = false;
-                    response.send(`Login (${username}, ID.${client[0].num_client}) successful!`);
+                    if (username == 'Farheen' && password == 'Farheen'){
+                        request.session.admin = true;
+                        response.send(`Login (${username}, ID.${client[0].num_client}) successful! Welcome admin!`);
+                    }
+                    else {
+                        request.session.admin = false;
+                        response.send(`Login (${username}, ID.${client[0].num_client}) successful!`);
+                    }
                     response.end();
                 }
             });
@@ -36,7 +44,7 @@ const registerControl = (request, response) => {
     const clientServices = require('../services/clientServices');
 
     let username = request.body.username;
-    let password = request.body.passwsord;
+    let password = request.body.password;
     let society = request.body.society;
     let contact = request.body.contact;
     let addres = request.body.addres;
@@ -64,8 +72,7 @@ const registerControl = (request, response) => {
 const getClients = (request, response) => {
     const clientServices = require('../services/clientServices');
     clientServices.searchService(function(err, rows) {
-        response.json(rows);
-        response.end();
+        response.render('clients', { clients: rows });
     });
 };
 
@@ -73,8 +80,7 @@ const getClientByNumclient = (request, response) => {
     const clientServices = require('../services/clientServices');
     let num_client = request.params.num_client;
     clientServices.searchNumclientService(num_client, function(err, rows) {
-        response.json(rows);
-        response.end();
+        response.render('clients', { clients: rows });
     });
 };
 

@@ -1,12 +1,12 @@
 const mysql = require('mysql');
-const databasename = "sql6440943";
+const databasename = "wplab3";
 
 var pool = mysql.createPool({
     connectionLimit: 100,
-    host: "sql6.freemysqlhosting.net",
-    user: "sql6440943",
+    host: "localhost",
+    user: "root",
     password: "",
-    database: "sql6440943",
+    database: "wplab3",
     debug: true
 });
 
@@ -39,5 +39,6 @@ function getResult(query, callback) {
 }
 
 module.exports = {
+    executeQuery,
     getResult
 };

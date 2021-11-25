@@ -1,18 +1,39 @@
 <%- include('header'); -%>
-    <div class="content">
-        <h3 id="welcome">Enter Username : </h2>
-            <input id="welcome"></input>
-        <h3 id="welcome">Enter Password : </h2>
-            <input id="welcome"></input>
-        <h3 id="welcome">Enter Name : </h2>
-            <input id="welcome"></input>
-        <h3 id="welcome">Enter Address : </h2>
-            <input id="welcome"></input>
-        <h3 id="welcome">Enter Phone Number : </h2>
-            <input id="welcome"></input>
-        <h3 id="welcome">Enter Email ID : </h2>
-            <input id="welcome"></input>
+<div class="register">
+    <form id="register" action = "/api/register" method= "POST">
+        <label for="username">Username : </label> <br>
+        <input type="text" id ="username" name="username" required> <br> 
+        <br>
+        <label for="password">Password : </label> <br>
+        <input type="password" id="password" name="password" required> <br>
+        <br>
+        <label for="society">Society : </label> <br>
+        <input type="text" id="society" name="society" required> <br>
+        <br>
+        <label for="contact">Contact : </label> <br>
+        <input type="text" id="contact" name="contact" required> <br>
+        <br>
+        <label for="addres">Address : </label> <br>
+        <input type="text" id="addres" name="addres" required> <br>
+        <br>
+        <label for="zipcode">Zipcode : </label> <br>
+        <input type="text" id="zipcode" name="zipcode" required> <br>
+        <br>
+        <label for="city">City : </label> <br>
+        <input type="text" id="city" name="city" required> <br>
+        <br>
+        <label for="phone">Phone : </label> <br>
+        <input type="text" id="phone" name="phone" required> <br>
+        <br>
+        <label for="fax">Fax : </label> <br>
+        <input type="text" id="fax" name="fax" required> <br>
+        <br>
+        <label for="max_outstanding">Max Outstanding : </label> <br>
+        <input type="text" id="max_outstanding" name="max_outstanding" required> <br>
+        <br>
+        <input type="submit">
         <br>
         <br>
-    </div>
+    </form>
+</div>
 <%- include('footer'); -%>

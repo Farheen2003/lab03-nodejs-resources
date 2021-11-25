@@ -17,11 +17,11 @@ const searchIDService = function(reference, callback) {
             throw err;
         }
         if (rows.length == 0) {
-            console.log("Unkown product!");
+            console.log("Unknown product!");
             let product = null;
-            calback(null, product);
+            callback(null, product);
         } else {
-            //rreturn the retrieved product 
+            //return the retrieved product 
             callback(null, rows[0]);
         }
     });
@@ -33,7 +33,7 @@ const searchCategoryService = function(category, callback) {
         }
         if (rows.length == 0) { //no products
             console.log(`No product in category ${category}!`);
-            calback(null, rows);
+            callback(null, rows);
         } else {
             //return the rows
             callback(null, rows);

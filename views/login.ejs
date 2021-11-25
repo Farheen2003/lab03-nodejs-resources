@@ -1,10 +1,15 @@
 <%- include('header'); -%>
-    <div class="content">
-        <h3 id="welcome">Enter Username : </h2>
-            <input id="welcome"></input>
-        <h3 id="welcome">Enter Password : </h2>
-            <input id="welcome"></input>
-        <br>
-        <br>
+    <div class="login">
+        <form action = "/api/login" method= "POST">
+            <label for="username">Login:</label> <br>
+            <input type="text" id ="username" name="username" required> <br> 
+            <br>
+            <label for="password">Password:</label> <br>
+            <input type="password" id="password" name="password" required> <br>
+            <br>
+            <input type="submit">
+            <br>
+            <br>
+        </form>
     </div>
 <%- include('footer'); -%>

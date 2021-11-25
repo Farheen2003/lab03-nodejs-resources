@@ -1,10 +1,19 @@
 const express = require('express');
+const session = require('express-session');
+
 //creating app
 const app = express();
+
+app.use(session({secret: 'some secret code'}));
+
+// using JSON and URL Encoded middleware 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true 
+}));
 //send the index.html when receiving HTTP GET /
 app.use(express.static('public'));
 app.get('/', (req, res) => {
- res.sendFile('index.html', { root: __dirname });
+res.sendFile('index.html', { root: __dirname });
 });
 //handling static HTML and EJS templates
 app.use(express.static('public'));
@@ -27,9 +36,16 @@ app.get('/register', (req, res) => {
 app.get('/login', (req, res) => {
     res.render('login');
 });
-   
-app.get('/catalogue', (req, res) => {
-    res.render('catalogue');
+app.get('/article', (req, res) => {
+    res.render('article/:id');
+});
+
+app.get('/catalog', (req, res) => {
+    res.render('/catalog');
+});
+
+app.get('/clients', (req, res) => {
+    res.render('/clients');
 });
 
 //pass requests to the router middleware
