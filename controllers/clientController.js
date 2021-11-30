@@ -70,10 +70,15 @@ const registerControl = (request, response) => {
 };
 
 const getClients = (request, response) => {
-    const clientServices = require('../services/clientServices');
-    clientServices.searchService(function(err, rows) {
-        response.render('clients', { clients: rows });
+    if (request.session.admin == true){
+        const clientServices = require('../services/clientServices');
+        clientServices.searchService(function(err, rows) {
+            response.render('clients', { clients: rows });
     });
+    }
+    else{
+        response.send('Please login to access clients. (Only accessible to admin)');
+    }
 };
 
 const getClientByNumclient = (request, response) => {
